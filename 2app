@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: Home()));
+}
+
+class Home extends StatefulWidget {
+  //muda
+  const Home({super.key});
+
+  @override //sobrescreve o metodo
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //defini o app bar e o body
+      appBar: AppBar(
+        title: Text('Alcool ou Gasolina?'),
+        backgroundColor: Colors.purple,
+      ), //Appbar barra de cima, titulo
+      body: Container(
+        child: Column(
+          //um flho
+          padding: EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 32), //apenas na base p n ficar junto
+                child: Image.network('https://br.freepik.com/fotos-vetores-gratis/png')
+              ),// esp imagem
+              Padding(
+               padding: EdgeInsets.only(bottom:10),
+               child: Text(
+                 'Calcule o melhor preço',
+                 style: TextStyle(
+                   fontSize:20,
+                   fontWeight: FontWeight.bold
+                 ), //textstyle
+               ), //text
+              ),//titulo
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'preço do alcool ex:1.65',
+                  labelStyle: TextStyle(fontSize:22)
+                ),//input decoration
+                controller: _controllerAlcool,
+              ),//entrada de dados
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'preço da gasolina ex:1.33',
+                  labelStyle: TextStyle(fontSize:22)
+                ),//input decoration
+                controller: _controllerGasolina,
+              ),//entrada de dados
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                   backgroundColor: Colors.blue,
+                   foregroundColor: Colors.white,
+                   padding: EdgeInsets.symmetric( horizontal: 20,vertical: 30),
+                    textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                 ),
+                  onPressed: _calcular,
+                  child: Text("Calcular")),
+              ),//botao
+              Padding(
+              padding: EdgeInsets.only(top:20),
+              child: Text( _resultado,
+              style: TextStyle(fontSize:22,fontWeight: FontWeight.bold),),
+              ) //saida
+            ], //varios filhos
+          ), //Column
+        ), //SingleChildScrollView
+      ), //Container
+    ); //Scaffold esqueleto
+  }
+}
